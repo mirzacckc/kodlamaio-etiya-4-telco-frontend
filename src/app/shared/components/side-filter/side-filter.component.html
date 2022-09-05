@@ -9,23 +9,23 @@
 
   <div class="e-input-container">
     <form [formGroup]="searchForm">
-      <label class="e-label mt-4">ID NUMBER</label>
-      <input type="text" etiyaInput="dark" formControlName="id" />
+      <label class="e-label mt-4">Nationality ID</label>
+      <input type="number" etiyaInput="dark" formControlName="nationalityId" />
 
       <label class="e-label">CUSTOMER ID</label>
-      <input type="text" etiyaInput="dark" formControlName="customerId" />
+      <input type="number" etiyaInput="dark" formControlName="customerId" />
 
       <label class="e-label">ACCOUNT NUMBER</label>
       <input type="text" etiyaInput="dark" formControlName="accountNumber" />
 
       <label class="e-label">GSM NUMBER</label>
-      <input type="text" etiyaInput="dark" formControlName="gsmNumber" />
+      <input type="text" etiyaInput="dark" formControlName="gsmNumber" maxlength="11" />
 
       <label class="e-label">FIRST NAME</label>
-      <input type="text" etiyaInput="dark" formControlName="firstName" />
+      <input type="text" etiyaInput="dark" formControlName="firstName" maxlength="50" />
 
       <label class="e-label">LAST NAME</label>
-      <input type="text" etiyaInput="dark" formControlName="lastname" />
+      <input type="text" etiyaInput="dark" formControlName="lastname" maxlength="50" />
 
       <label class="e-label">ORDER NUMBER</label>
       <input type="text" etiyaInput="dark" formControlName="orderNumber" />

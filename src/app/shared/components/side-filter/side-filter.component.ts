@@ -22,7 +22,7 @@ export class SideFilterComponent implements OnInit {
 
   createSearchForm(): void {
     this.searchForm = this.formBuilder.group({
-      id: [''],
+      nationalityId: [''],
       customerId: [''],
       accountNumber: [''],
       gsmNumber: [''],
@@ -33,8 +33,14 @@ export class SideFilterComponent implements OnInit {
   }
 
   search() {
+    let nationalityId = parseInt(this.searchForm.value.nationalityId);
+    console.warn(typeof nationalityId);
+    const newSearchForm = {
+      ...this.searchForm.value,
+      nationalityId: nationalityId,
+    };
     this.customersService
-      .getListByFilter(this.searchForm.value)
+      .getListByFilter(newSearchForm)
       .subscribe((data) => {
         this.filteredData.emit(data);
       });
