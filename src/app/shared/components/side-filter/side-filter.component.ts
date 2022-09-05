@@ -27,14 +27,13 @@ export class SideFilterComponent implements OnInit {
       accountNumber: [''],
       gsmNumber: [''],
       firstName: [''],
-      lastname: [''],
+      lastName: [''],
       orderNumber: [''],
     });
   }
 
   search() {
     let nationalityId = parseInt(this.searchForm.value.nationalityId);
-    console.warn(typeof nationalityId);
     const newSearchForm = {
       ...this.searchForm.value,
       nationalityId: nationalityId,

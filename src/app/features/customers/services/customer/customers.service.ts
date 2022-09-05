@@ -71,11 +71,11 @@ export class CustomersService {
               .includes(searchCustomer.firstName.toLowerCase())
           );
         }
-        if (searchCustomer.lastname) {
+        if (searchCustomer.lastName) {
           filteredCustomers = filteredCustomers.filter((item) =>
             item
               .lastName!.toLowerCase()
-              .includes(searchCustomer.lastname.toLowerCase())
+              .includes(searchCustomer.lastName.toLowerCase())
           );
         }
         if (searchCustomer.orderNumber) {
