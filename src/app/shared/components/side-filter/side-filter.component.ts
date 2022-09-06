@@ -38,6 +38,7 @@ export class SideFilterComponent implements OnInit {
       ...this.searchForm.value,
       nationalityId: nationalityId,
     };
+    console.log(nationalityId)
     this.customersService
       .getListByFilter(newSearchForm)
       .subscribe((data) => {

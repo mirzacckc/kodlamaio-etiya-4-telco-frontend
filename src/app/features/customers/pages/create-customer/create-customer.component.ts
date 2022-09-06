@@ -30,11 +30,11 @@ export class CreateCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.createCustomerModel$.subscribe((state) => {
       this.customer = state;
-      this.createFormUpdateCustomer();
+      this.createFormAddCustomer();
     });
   }
 
-  createFormUpdateCustomer() {
+  createFormAddCustomer() {
     this.profileForm = this.formBuilder.group({
       firstName: [this.customer.firstName, Validators.required],
       middleName: [this.customer.middleName],
@@ -44,7 +44,7 @@ export class CreateCustomerComponent implements OnInit {
       fatherName: [this.customer.fatherName],
       motherName: [this.customer.motherName],
       nationalityId: [this.customer.nationalityId,
-        [Validators.required, Validators.minLength(11)],],
+        [Validators.required, Validators.minLength(11)]],
     });
   }
   goNextPage() {
