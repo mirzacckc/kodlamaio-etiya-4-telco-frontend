@@ -30,7 +30,18 @@
                     type="text"
                     etiyaInput="dark"
                     formControlName="firstName"
+                    aria-describedby="firstName-help"
                   />
+                  <span
+                    *ngIf="
+                      (profileForm.get('firstName')?.hasError('required') &&
+                        profileForm.get('firstName')?.dirty) ||
+                      profileForm.get('firstName')?.touched
+                    "
+                    id="firstName-help"
+                    class="p-error block ng-invalid ng-dirty"
+                    >Name is not available.</span
+                  >
                 </div>
               </div>
             </div>
