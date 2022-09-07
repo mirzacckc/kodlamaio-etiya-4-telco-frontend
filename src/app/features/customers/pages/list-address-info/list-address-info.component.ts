@@ -16,11 +16,12 @@ export class ListAddressInfoComponent implements OnInit {
   ngOnInit(): void {
     this.customersService.customerToAddModel$.subscribe((state) => {
       this.customer = state;
+      console.log(this.customer.addresses)
     });
   }
 
   selectAddressId(id: number) {
     let address = this.customer.addresses?.find((c) => c.id == id);
-    this.router.navigateByUrl(`update-address-info/${address?.id}`);
+    this.router.navigateByUrl(`/dashboard/customers/update-address-info/${address?.id}`);
   }
 }

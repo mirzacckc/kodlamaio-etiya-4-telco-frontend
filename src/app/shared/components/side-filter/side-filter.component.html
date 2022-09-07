@@ -14,7 +14,7 @@
         type="number"
         etiyaInput="dark"
         formControlName="nationalityId"
-        onkeydown="return event.keyCode !== 69 && event.keyCode !==110 && event.keyCode !==109 && event.keyCode !==190 && event.keyCode !==107 && event.keyCode !==188"
+        (keypress)="isNumber($event)"
         onKeyPress="if(this.value.length==11) return false;"
         #nationalityId
       />
@@ -24,7 +24,7 @@
         type="number"
         etiyaInput="dark"
         formControlName="customerId"
-        onkeydown="return event.keyCode !== 69 && event.keyCode !==110 && event.keyCode !==109 && event.keyCode !==190 && event.keyCode !==107 && event.keyCode !==188"
+        (keypress)="isNumber($event)"
         #customerId
       />
 
@@ -33,6 +33,7 @@
         type="text"
         etiyaInput="dark"
         formControlName="accountNumber"
+        maxlength="10"
         #accountNumber
       />
 
@@ -70,6 +71,7 @@
         type="text"
         etiyaInput="dark"
         formControlName="orderNumber"
+        (keypress)="isNumber($event)"
         #orderNumber
       />
     </form>

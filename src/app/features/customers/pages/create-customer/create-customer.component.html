@@ -213,15 +213,15 @@
                   class="col-12 col-lg-8 d-flex justify-content-lg-start align-items-center"
                 >
                   <input
-                    type="number"
+                    type="text"
                     etiyaInput="dark"
                     formControlName="nationalityId"
-                    onKeyPress="if(this.value.length==11) return false;"
+                    maxlength="11"
                     [ngClass]="{
                       'invalid-input':
                         isShow && profileForm.controls['nationalityId'].errors
                     }"
-                    onkeydown="return event.keyCode !== 69 && event.keyCode !==110 && event.keyCode !==109 && event.keyCode !==190 && event.keyCode !==107 && event.keyCode !==188"
+                    (keypress)="isNumber($event)"
                   />
                 </div>
                 <small

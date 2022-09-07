@@ -39,10 +39,7 @@ export const customerToAddReducer = createReducer(
     return newState;
   }),
   on(setContactMediumInfo, (state, action) => {
-    console.log('state:', state);
-    console.log('action:', action);
     const newState: Customer = { ...state, contactMedium: action };
-    console.log('newstate:', newState);
     return newState;
   }),
   on(updateAddressInfo, (state, action) => {

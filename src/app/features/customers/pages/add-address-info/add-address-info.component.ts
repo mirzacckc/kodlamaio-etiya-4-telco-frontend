@@ -60,10 +60,12 @@ export class AddAddressInfoComponent implements OnInit {
   }
 
   save() {
-    if (this.selectedAddressId==undefined) {
-      this.addAddress();      
-    } else {
+    console.log(this.selectedAddressId)
+    if (this.selectedAddressId) {
       this.updateAddress();
+    } else {
+      this.addAddress(); 
+      
     }
   }
 
