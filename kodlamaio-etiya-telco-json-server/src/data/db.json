@@ -2565,41 +2565,6 @@
           ]
         }
       ]
-    },
-    {
-      "customerId": 9999,
-      "firstName": "dasd",
-      "middleName": null,
-      "lastName": "adsasd",
-      "birthDate": "2022-09-30",
-      "gender": "Female",
-      "nationalityId": 11111111111,
-      "role": "individual",
-      "motherName": null,
-      "fatherName": null,
-      "addresses": [
-        {
-          "city": {
-            "id": 4,
-            "name": "Houston"
-          },
-          "street": "ljş",
-          "flatNumber": "jklk",
-          "description": "kjlkj",
-          "type": "[CustomerToAdd] Add Address Info",
-          "id": 1
-        }
-      ],
-      "contactMedium": {
-        "email": "asas@hmail.com",
-        "homePhone": "0020",
-        "mobilePhone": "54454454",
-        "fax": "1020",
-        "type": "[CustomerToAdd] Set ContactMedium Info"
-      },
-      "billingAccounts": [],
-      "type": "[CustomerToAdd] Set Demographic Info",
-      "id": 21
     }
   ],
   "offers": [
