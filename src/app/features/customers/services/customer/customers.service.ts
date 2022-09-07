@@ -1,5 +1,6 @@
 import {
   addAddressInfo,
+  removeAddressInfo,
   setContactMediumInfo,
   setDemographicInfo,
   updateAddressInfo,
@@ -115,8 +116,15 @@ export class CustomersService {
     this.store.dispatch(addAddressInfo(newAddress));
   }
 
-  updateAddressInfoToStore(props: Address, customers: Customer) {
-    this.store.dispatch(updateAddressInfo(props));
+  updateAddressInfoToStore(props: Address) {
+    const newAddress: Address = {
+      ...props,
+    };
+    this.store.dispatch(updateAddressInfo(newAddress));
+  }
+
+  removeAdress(address: Address) {
+    this.store.dispatch(removeAddressInfo(address));
   }
 
   setContactMediumInfoToStore(props: ContactMedium) {

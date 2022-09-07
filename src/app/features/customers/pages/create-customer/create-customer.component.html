@@ -213,10 +213,10 @@
                   class="col-12 col-lg-8 d-flex justify-content-lg-start align-items-center"
                 >
                   <input
-                    type="text"
+                    type="number"
                     etiyaInput="dark"
                     formControlName="nationalityId"
-                    maxlength="11"
+                    onKeyPress="if(this.value.length==11) return false;"
                     [ngClass]="{
                       'invalid-input':
                         isShow && profileForm.controls['nationalityId'].errors

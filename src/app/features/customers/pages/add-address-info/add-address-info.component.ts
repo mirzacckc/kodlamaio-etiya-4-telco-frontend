@@ -52,7 +52,7 @@ export class AddAddressInfoComponent implements OnInit {
 
   createAddressForm() {
     this.addressForm = this.formBuilder.group({
-      city: [this.addressList?.city?.id || 0, Validators.required],
+      city: [this.addressList?.city?.id || 0, [Validators.required,Validators.min(1)]],
       street: [this.addressList?.street || '', Validators.required],
       flatNumber: [this.addressList?.flatNumber || '', Validators.required],
       description: [this.addressList?.description || '', Validators.required],
@@ -87,6 +87,7 @@ export class AddAddressInfoComponent implements OnInit {
   }
 
   updateAddress() {
+    if (this.addressForm.valid) {
     let addressToFind = this.customer.addresses?.find(
       (c) => c.id == this.selectedAddressId
     );
@@ -99,10 +100,14 @@ export class AddAddressInfoComponent implements OnInit {
         ),
       };
       this.customersService.updateAddressInfoToStore(
-        addressToUpdate,
-        this.customer
+        addressToUpdate
       );
       this.router.navigateByUrl('/dashboard/customers/list-address-info');
+      this.isShow = false;
+      }
+    }
+    else{
+      this.isShow = true
     }
   }
 
