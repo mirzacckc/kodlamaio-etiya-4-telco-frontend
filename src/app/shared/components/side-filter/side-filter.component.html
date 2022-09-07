@@ -14,6 +14,7 @@
         type="number"
         etiyaInput="dark"
         formControlName="nationalityId"
+        onkeydown="return event.keyCode !== 69 && event.keyCode !==110 && event.keyCode !==109 && event.keyCode !==190 && event.keyCode !==107 && event.keyCode !==188"
         onKeyPress="if(this.value.length==11) return false;"
         #nationalityId
       />
@@ -23,6 +24,7 @@
         type="number"
         etiyaInput="dark"
         formControlName="customerId"
+        onkeydown="return event.keyCode !== 69 && event.keyCode !==110 && event.keyCode !==109 && event.keyCode !==190 && event.keyCode !==107 && event.keyCode !==188"
         #customerId
       />
 

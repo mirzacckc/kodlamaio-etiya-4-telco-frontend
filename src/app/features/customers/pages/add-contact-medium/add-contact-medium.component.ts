@@ -30,7 +30,7 @@ export class AddContactMediumComponent implements OnInit {
   }
   createFormContactMedium() {
     this.contactForm = this.formBuilder.group({
-      email: [this.customer.contactMedium?.email, Validators.required],
+      email: [this.customer.contactMedium?.email, [Validators.email,Validators.required]],
       homePhone: [this.customer.contactMedium?.homePhone, Validators.required],
       mobilePhone: [
         this.customer.contactMedium?.mobilePhone,
