@@ -90,7 +90,7 @@ label {
 
 small{
   font-weight: 200!important;
-  font-size: 25px!important;
+  font-size: 15px!important;
 }
 
 ::ng-deep .e-btn-clear:disabled{

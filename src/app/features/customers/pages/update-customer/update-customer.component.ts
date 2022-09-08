@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +16,9 @@ export class UpdateCustomerComponent implements OnInit {
   selectedCustomerId!: number;
   customer!: Customer;
   isShow: Boolean = false;
-  isNationaltyId:Boolean=false
+  isNationaltyId:Boolean=false;
+  today: Date = new Date();
+  isBirthDate:Boolean=false;
 
 
   constructor(
@@ -31,20 +34,22 @@ export class UpdateCustomerComponent implements OnInit {
   }
 
   createFormUpdateCustomer() {
+    console.log(this.customer.birthDate);
+    let bDate = new Date();
+    if (this.customer.birthDate) {
+      bDate = new Date(this.customer.birthDate);
+    }
     this.updateCustomerForm = this.formBuilder.group({
-      firstName: [
-        this.customer.firstName,
-        [Validators.required, Validators.maxLength(50)],
+      firstName: [this.customer.firstName, Validators.required],
+      middleName: [this.customer.middleName],
+      lastName: [this.customer.lastName, Validators.required],
+      birthDate: [
+        formatDate(new Date(bDate), 'yyyy-MM-dd', 'en'),
+        Validators.required,
       ],
-      middleName: [this.customer.middleName, [Validators.maxLength(50)]],
-      lastName: [
-        this.customer.lastName,
-        [Validators.required, Validators.maxLength(50)],
-      ],
-      birthDate: [this.customer.birthDate, Validators.required],
       gender: [this.customer.gender, Validators.required],
-      fatherName: [this.customer.fatherName, [Validators.maxLength(50)]],
-      motherName: [this.customer.motherName, [Validators.maxLength(50)]],
+      fatherName: [this.customer.fatherName],
+      motherName: [this.customer.motherName],
       nationalityId: [
         this.customer.nationalityId,
         [Validators.pattern('^[0-9]{11}$'), Validators.required],
@@ -65,6 +70,15 @@ export class UpdateCustomerComponent implements OnInit {
           this.customer = data;
           this.createFormUpdateCustomer();
         });
+    }
+  }
+
+  onDateChange(event: any) {
+    this.isBirthDate = false;
+    let date = new Date(event.target.value);
+    if (date.getFullYear() > this.today.getFullYear()) {
+      this.updateCustomerForm.get('birthDate')?.setValue('');
+      this.isBirthDate = true;
     }
   }
 

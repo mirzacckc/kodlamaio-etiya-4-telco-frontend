@@ -82,6 +82,8 @@
                     type="date"
                     etiyaInput="dark"
                     formControlName="birthDate"
+                    [max]="today | date: 'yyyy-MM-dd'"
+                    (blur)="onDateChange($event)"
                     [ngClass]="{
                       'invalid-input':
                         isShow &&
@@ -89,6 +91,14 @@
                     }"
                   />
                 </div>
+                <small
+                  *ngIf="isBirthDate"
+                  id="lastName-help"
+                  class="p-error block ng-invalid ng-dirty"
+                  style="color: red; margin-left: 220px; margin-top: -15px"
+                >
+                  Enter a valid date
+                </small>
               </div>
               <div class="col-6">
                 <div
