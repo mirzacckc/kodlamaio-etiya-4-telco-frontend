@@ -9,7 +9,6 @@ import {
 import { Customer } from '../../models/customer';
 import { CustomersService } from '../../services/customer/customers.service';
 import { Router } from '@angular/router';
-import { CustomerDemographicInfo } from '../../models/customerDemographicInfo';
 
 @Component({
   templateUrl: './create-customer.component.html',
@@ -39,14 +38,14 @@ export class CreateCustomerComponent implements OnInit {
 
   createFormAddCustomer() {
     this.profileForm = this.formBuilder.group({
-      firstName: [this.customer.firstName, Validators.required],
-      middleName: [this.customer.middleName],
-      lastName: [this.customer.lastName, Validators.required],
-      birthDate: [this.customer.birthDate, Validators.required],
-      gender: [this.customer.gender ?? '', Validators.required],
-      fatherName: [this.customer.fatherName],
-      motherName: [this.customer.motherName],
-      nationalityId: [this.customer.nationalityId,
+      firstName: ['', Validators.required],
+      middleName: [''],
+      lastName: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      gender: ['', Validators.required],
+      fatherName: [''],
+      motherName: [''],
+      nationalityId: ['',
         [Validators.pattern('^[0-9]{11}$'), Validators.required]],
     });
   }
