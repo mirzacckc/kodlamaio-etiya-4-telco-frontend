@@ -33,12 +33,15 @@ export class CustomerInfoComponent implements OnInit {
         let filteredData = this.customer.billingAccounts?.find((c) => {
           return c.status === 'active';
         });
+        this.messageService.clear();
         if (filteredData) {
           this.messageService.add({
-            key: 'etiya-warn',
+            key: 'okey',            
+            sticky: true,
+            severity: 'warn',
             detail:
-              'Since the customer has active products, the customer cannot be deleted.',
-          });
+              'Since the customer has active products, the customer cannot be deleted.',            
+          });   
         } else {
           this.messageService.clear();
           this.removeCustomer();
@@ -73,7 +76,7 @@ export class CustomerInfoComponent implements OnInit {
       key: 'c',
       sticky: true,
       severity: 'warn',
-      detail: 'Your changes could not be saved. Are you sure?',
+      detail: 'Are you sure to delete this customer?',
     });
   }
 

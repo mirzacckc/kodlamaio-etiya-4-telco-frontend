@@ -79,7 +79,7 @@ export class CustomerAddressComponent implements OnInit {
     this.customerService
       .removeAddress(this.addressToDelete, this.customer)
       .subscribe((data) => {
-        this.getCustomerById();
+        // this.getCustomerById();
       });
   }
 }
