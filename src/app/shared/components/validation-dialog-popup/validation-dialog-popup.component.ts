@@ -8,12 +8,14 @@ import { MessageService } from 'primeng/api';
 })
 export class ValidationDialogPopupComponent implements OnInit {
 
+  displayBasic:boolean=true;
+
   constructor(private messageService:MessageService) { }
 
   ngOnInit(): void {
   }
 
-  Clear() {
+  onConfirm() {
     this.messageService.clear();
   }
 
