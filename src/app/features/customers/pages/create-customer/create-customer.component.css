@@ -75,4 +75,5 @@ input::placeholder {
 small{
   font-weight: 200!important;
   font-size: 25px!important;
+  color: red
 }

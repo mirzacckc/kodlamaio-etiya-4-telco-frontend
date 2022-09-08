@@ -192,6 +192,18 @@
                     (keypress)="isNumber($event)"
                   />
                 </div>
+                <small
+                  *ngIf="isNationaltyId && profileForm.valid"
+                  id="lastName-help"
+                  class="p-error block ng-invalid ng-dirty"
+                  style="
+                    margin-left: 350px;
+                    margin-top: -15px;
+                    font-size: 15px !important;
+                  "
+                >
+                  “A customer is already exist with this National ID
+                </small>
               </div>
             </div>
           </div>
@@ -206,7 +218,7 @@
             "
             id="lastName-help"
             class="p-error block ng-invalid ng-dirty"
-            style="color: red; margin-left: 350px; margin-top: 5px"
+            style="margin-left: 350px; margin-top: 5px"
           >
             Requirements field can not be left blank
           </small>
