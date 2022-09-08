@@ -107,7 +107,7 @@
                       }"
                     >
                       <option selected value="Female">Female</option>
-                      <option value="Erkek">Erkek</option>
+                      <option value="Male">Male</option>
                     </select>
                   </div>
                 </div>
@@ -152,6 +152,18 @@
                     }"
                   />
                 </div>
+                <small
+                  *ngIf="isNationaltyId && updateCustomerForm.valid"
+                  id="lastName-help"
+                  class="p-error block ng-invalid ng-dirty"
+                  style="
+                    margin-left: 350px;
+                    margin-top: -15px;
+                    font-size: 15px !important;
+                  "
+                >
+                  “A customer is already exist with this National ID
+                </small>
               </div>
             </div>
           </div>
@@ -165,7 +177,7 @@
               <div class="col-6 d-flex justify-content-lg-end">
                 <button
                   etiyaButton="clear"
-                  (click)="UpdateCustomer()"
+                  (click)="update()"
                   [disabled]="
                     updateCustomerForm.value.firstName == customer.firstName &&
                     updateCustomerForm.value.lastName == customer.lastName &&

@@ -111,7 +111,7 @@ export class CustomersService {
   addAddressInfoToStore(props: Address, customers: Customer) {
     const newAddress: Address = {
       ...props,
-      id: (customers.addresses?.length || 0) + 1,
+      id: Math.floor(Math.random()*1000),
     };
     this.store.dispatch(addAddressInfo(newAddress));
   }
@@ -193,7 +193,7 @@ export class CustomersService {
       ...customer,
       addresses: [
         ...(customer.addresses || []),
-        { ...address, id: (customer.addresses?.length || 0) + 1 },
+        { ...address, id: Math.floor(Math.random()*10000) },
       ],
     };
     return this.httpClient.put<Customer>(
@@ -242,7 +242,7 @@ export class CustomersService {
       ...customer,
       billingAccounts: [
         ...(customer.billingAccounts || []),
-        { ...billingAccount, id: (customer.billingAccounts?.length || 0) + 1 },
+        { ...billingAccount, id: Math.floor(Math.random()*1000) },
       ],
     };
     console.log(newCustomer);
@@ -269,5 +269,4 @@ export class CustomersService {
       newCustomer
     );
   }
-
 }
