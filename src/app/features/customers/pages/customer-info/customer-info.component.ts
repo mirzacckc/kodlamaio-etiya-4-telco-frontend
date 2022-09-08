@@ -27,9 +27,9 @@ export class CustomerInfoComponent implements OnInit {
 
   checkIsActiveStatus() {
     this.messageService.clearObserver.subscribe((data) => {
-      if (data == 'r') {
+      if (data == 'reject') {
         this.messageService.clear();
-      } else if (data == 'c') {
+      } else if (data == 'confirm') {
         let filteredData = this.customer.billingAccounts?.find((c) => {
           return c.status === 'active';
         });
