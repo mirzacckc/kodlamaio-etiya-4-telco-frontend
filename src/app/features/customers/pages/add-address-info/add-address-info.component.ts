@@ -52,12 +52,21 @@ export class AddAddressInfoComponent implements OnInit {
 
   createAddressForm() {
     this.addressForm = this.formBuilder.group({
-      city: [this.addressList?.city?.id || 0, [Validators.required,Validators.min(1)]],
-      street: [this.addressList?.street || '', Validators.required],
-      flatNumber: [this.addressList?.flatNumber || '', Validators.required],
-      description: [this.addressList?.description || '', Validators.required],
+      city: ['', [Validators.required,Validators.min(1)]],
+      street: ['', Validators.required],
+      flatNumber: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
+
+  // createAddressForm() {
+  //   this.addressForm = this.formBuilder.group({
+  //     city: [this.addressList?.city?.id || 0, [Validators.required,Validators.min(1)]],
+  //     street: [this.addressList?.street || '', Validators.required],
+  //     flatNumber: [this.addressList?.flatNumber || '', Validators.required],
+  //     description: [this.addressList?.description || '', Validators.required],
+  //   });
+  // }
 
   save() {
     console.log(this.selectedAddressId)
