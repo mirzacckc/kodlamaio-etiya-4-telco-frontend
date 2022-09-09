@@ -21,6 +21,8 @@ export class CreateCustomerComponent implements OnInit {
   customer!: Customer;
   isShow:Boolean=false
   isNationaltyId:Boolean=false
+  today: Date = new Date();
+  isBirthDate:Boolean=false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -89,6 +91,17 @@ export class CreateCustomerComponent implements OnInit {
 
     event.preventDefault();
     return false;
+  }
+
+  onDateChange(event: any) {
+    this.isBirthDate = false;
+    let date = new Date(event.target.value);
+    if (date.getFullYear() > this.today.getFullYear() || 
+    date.getMonth() > this.today.getMonth() || 
+    date.getDay() > this.today.getDay()) {
+      this.profileForm.get('birthDate')?.setValue('');
+      this.isBirthDate = true;
+    }
   }
 
 }

@@ -76,7 +76,9 @@ export class UpdateCustomerComponent implements OnInit {
   onDateChange(event: any) {
     this.isBirthDate = false;
     let date = new Date(event.target.value);
-    if (date.getFullYear() > this.today.getFullYear()) {
+    if (date.getFullYear() > this.today.getFullYear() || 
+    date.getMonth() > this.today.getMonth() || 
+    date.getDay() > this.today.getDay()) {
       this.updateCustomerForm.get('birthDate')?.setValue('');
       this.isBirthDate = true;
     }
