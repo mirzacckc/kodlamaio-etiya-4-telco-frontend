@@ -23,7 +23,6 @@ export class CustomerBillingAccountComponent implements OnInit {
   isValid: boolean = false;
   isShownError: boolean = false;
 
-
   billingAdress: Address[] = [];
 
   constructor(
@@ -63,7 +62,7 @@ export class CustomerBillingAccountComponent implements OnInit {
   createAccountForm() {
     this.accountForm = this.formBuilder.group({
       accountName: ['', Validators.required],
-      accountDescription: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
 
@@ -87,48 +86,47 @@ export class CustomerBillingAccountComponent implements OnInit {
       this.cityList = data;
     });
   }
-  
 
   addAddress() {
-    if(this.addressForm.valid)
-   {
-    this.isShownError=false; 
-    const addressToAdd: Address = {
-      ...this.addressForm.value,
-      city: this.cityList.find(
-        (city) => city.id == this.addressForm.value.city
-      ),
-    };
-    this.billingAdress.push(addressToAdd);
-    console.log(addressToAdd);
-    this.isShown = false;}
-    else{
-      this.isValid=false;
-      this.isShownError=true;
+    if (this.addressForm.valid) {
+      this.isShownError = false;
+      const addressToAdd: Address = {
+        ...this.addressForm.value,
+        city: this.cityList.find(
+          (city) => city.id == this.addressForm.value.city
+        ),
+      };
+      this.billingAdress.push(addressToAdd);
+      console.log(addressToAdd);
+      this.isShown = false;
+    } else {
+      this.isValid = false;
+      this.isShownError = true;
     }
   }
 
   add() {
-    if(this.accountForm.valid)
-    {
-      this.isValid=false;
+    if (this.accountForm.valid) {
+      this.isValid = false;
       this.billingAccount = this.accountForm.value;
-    this.billingAccount.addresses = this.billingAdress;
-    this.billingAccount.status = 'active'
-    this.billingAccount.accountNumber = String(Math.floor(Math.random()*1000000000))
-    console.log(this.billingAccount);
-    this.customerService
-      .addBillingAccount(this.billingAccount, this.customer)
-      .subscribe(()=>{
-        this.router.navigateByUrl(
-          '/dashboard/customers/customer-billing-account-detail/' +
-            this.selectedCustomerId
-        );
-      })}
-      else{
-        this.isShownError=false;
-        this.isValid=true
-      }
+      this.billingAccount.addresses = this.billingAdress;
+      this.billingAccount.status = 'active';
+      this.billingAccount.accountNumber = String(
+        Math.floor(Math.random() * 1000000000)
+      );
+      console.log(this.billingAccount);
+      this.customerService
+        .addBillingAccount(this.billingAccount, this.customer)
+        .subscribe(() => {
+          this.router.navigateByUrl(
+            '/dashboard/customers/customer-billing-account-detail/' +
+              this.selectedCustomerId
+          );
+        });
+    } else {
+      this.isShownError = false;
+      this.isValid = true;
+    }
   }
 
   goToPreviousPage() {
@@ -137,5 +135,4 @@ export class CustomerBillingAccountComponent implements OnInit {
         this.selectedCustomerId
     );
   }
-  
 }
