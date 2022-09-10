@@ -20,6 +20,9 @@ export class CustomerBillingAccountComponent implements OnInit {
   selectedCustomerId!: number;
   customer!: Customer;
   billingAccount!: BillingAccount;
+  isValid: boolean = false;
+  isShownError: boolean = false;
+
 
   billingAdress: Address[] = [];
 
@@ -84,25 +87,55 @@ export class CustomerBillingAccountComponent implements OnInit {
       this.cityList = data;
     });
   }
+  
 
   addAddress() {
+    if(this.addressForm.valid)
+   {
+    this.isShownError=false; 
     const addressToAdd: Address = {
       ...this.addressForm.value,
       city: this.cityList.find(
-        (city) => city.id == this.addressForm.value.city.id
+        (city) => city.id == this.addressForm.value.city
       ),
     };
     this.billingAdress.push(addressToAdd);
     console.log(this.billingAdress);
-    this.isShown = false;
+    this.isShown = false;}
+    else{
+      this.isValid=false;
+      this.isShownError=true;
+    }
   }
 
   add() {
-    this.billingAccount = this.accountForm.value;
+    if(this.accountForm.valid)
+    {
+      this.isValid=false;
+      this.billingAccount = this.accountForm.value;
     this.billingAccount.addresses = this.billingAdress;
+    this.billingAccount.status = 'active'
+    this.billingAccount.accountNumber = String(Math.floor(Math.random()*1000000000))
     console.log(this.billingAccount);
     this.customerService
       .addBillingAccount(this.billingAccount, this.customer)
-      .subscribe();
+      .subscribe(()=>{
+        this.router.navigateByUrl(
+          '/dashboard/customers/customer-billing-account-detail/' +
+            this.selectedCustomerId
+        );
+      })}
+      else{
+        this.isShownError=false;
+        this.isValid=true
+      }
   }
+
+  goToPreviousPage() {
+    this.router.navigateByUrl(
+      '/dashboard/customers/customer-billing-account-detail/' +
+        this.selectedCustomerId
+    );
+  }
+  
 }

@@ -1,8 +1,11 @@
-import { Product } from './../../../features/customers/models/product';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { BillingAccount } from 'src/app/features/customers/models/billingAccount';
 import { Offer } from 'src/app/features/offers/models/offer';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import {  MessageService } from 'primeng/api';
+import { CustomersService } from 'src/app/features/customers/services/customer/customers.service';
+import { Customer } from 'src/app/features/customers/models/customer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-accordion',
@@ -12,10 +15,44 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class TableAccordionComponent implements OnInit {
   @Input() billingAccount!: BillingAccount;
   @Input() customerId!: number;
+  customer!:Customer;
+  billingAccountToDelete!:BillingAccount;
 
-  constructor(private messageService:MessageService) {}
+  constructor(private messageService:MessageService,private customerService:CustomersService,private router:Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCustomerById()
+    this.messageService.clearObserver.subscribe((data) => {
+      if (data == 'reject') {
+        this.messageService.clear();
+      } else if (data == 'confirm') {
+        if(this.billingAccountToDelete.orders.length>0)
+        {
+          this.messageService.clear(); 
+          this.messageService.add({
+            key: 'offer',
+            severity: 'warn',
+            detail: 'There is a product belonging to the account, this account cannot be deleted',
+          });
+          setTimeout(() => {
+          this.messageService.clear();           
+          }, 3000);         
+        }
+        else{     
+          this.messageService.clear(); 
+          this.messageService.add({
+            key: 'offer',
+            severity: 'warn',
+            detail: 'Customer account deleted successfully',
+          });    
+          setTimeout(() => {
+            this.messageService.clear();           
+            }, 3000); 
+          this.remove();
+        }       
+      }
+    });
+  }
 
   productDetail(billingAccount:BillingAccount,offer:Offer){
       if(offer.type.typeName == 'campaign'){
@@ -46,7 +83,39 @@ export class TableAccordionComponent implements OnInit {
           'ProdOfferName:'+cgProdOfferName+'   '            
         });
       }
+  }
 
+  getCustomerById() {       
+    if (this.customerId == undefined) {
+      //toast
+    } else {
+      this.customerService
+        .getCustomerById(this.customerId)
+        .subscribe((data) => {
+          this.customer = data;
+        });
+    }
+  }
 
+  
+  removePopup(billinAccount: BillingAccount) {
+    this.billingAccountToDelete = billinAccount;
+    this.messageService.add({
+      key: 'c',
+      sticky: true,
+      severity: 'warn',
+      detail: 'Are you sure you want to delete?',
+    });
+  }
+
+  remove() {            
+    this.customerService
+      .removeBillingAccount(this.billingAccountToDelete, this.customer)
+      .subscribe((data) => {
+        setTimeout(() => {
+          window.location.reload()
+        }, 3000);
+       
+      });      
   }
 }
