@@ -49,6 +49,7 @@
                     etiyaButton="edit"
                   ></button>
                   <button
+                    *ngIf="customerAddress.length > 1"
                     (click)="removePopup(adr)"
                     etiyaButton="remove"
                   ></button>
