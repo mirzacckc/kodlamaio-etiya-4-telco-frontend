@@ -56,8 +56,8 @@ export class CustomersService {
         }
         if (searchCustomer.accountNumber) {
           filteredCustomers = filteredCustomers.filter((item) =>
-            item.billingAccounts!.find(
-              (ba) => ba.accountNumber == searchCustomer.accountNumber
+            item.billingAccounts!.find((ba) =>
+              ba.accountNumber.includes(searchCustomer.accountNumber)
             )
           );
         }

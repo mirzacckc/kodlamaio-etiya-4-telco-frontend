@@ -100,7 +100,7 @@ export class CustomerBillingAccountComponent implements OnInit {
       ),
     };
     this.billingAdress.push(addressToAdd);
-    console.log(this.billingAdress);
+    console.log(addressToAdd);
     this.isShown = false;}
     else{
       this.isValid=false;
