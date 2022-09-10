@@ -47,7 +47,7 @@ export class CustomersService {
             item
               .nationalityId!.toString()
               .includes(searchCustomer.nationalityId.toString())
-          );;
+          );
         }
         if (searchCustomer.customerId) {
           filteredCustomers = filteredCustomers.filter(
@@ -63,10 +63,12 @@ export class CustomersService {
         }
 
         if (searchCustomer.gsmNumber) {
-          filteredCustomers = filteredCustomers.filter(
-            (item) =>
-               item.contactMedium!.mobilePhone.substr(1,14).split(' ').join('').includes(searchCustomer.gsmNumber)
-              
+          filteredCustomers = filteredCustomers.filter((item) =>
+            item
+              .contactMedium!.mobilePhone.substr(1, 14)
+              .split(' ')
+              .join('')
+              .includes(searchCustomer.gsmNumber)
           );
         }
 
@@ -111,7 +113,7 @@ export class CustomersService {
   addAddressInfoToStore(props: Address, customers: Customer) {
     const newAddress: Address = {
       ...props,
-      id: Math.floor(Math.random()*1000),
+      id: Math.floor(Math.random() * 1000),
     };
     this.store.dispatch(addAddressInfo(newAddress));
   }
@@ -193,7 +195,7 @@ export class CustomersService {
       ...customer,
       addresses: [
         ...(customer.addresses || []),
-        { ...address, id: Math.floor(Math.random()*10000) },
+        { ...address, id: Math.floor(Math.random() * 10000) },
       ],
     };
     return this.httpClient.put<Customer>(
@@ -242,7 +244,7 @@ export class CustomersService {
       ...customer,
       billingAccounts: [
         ...(customer.billingAccounts || []),
-        { ...billingAccount, id: Math.floor(Math.random()*1000) },
+        { ...billingAccount, id: Math.floor(Math.random() * 1000) },
       ],
     };
     console.log(newCustomer);
@@ -281,6 +283,28 @@ export class CustomersService {
       (bill) => bill.id != billingAccountToDelete.id
     );
     newCustomer.billingAccounts = newBillingAccount;
+
+    return this.httpClient.put<Customer>(
+      `${this.apiControllerUrl}/${customer.id}`,
+      newCustomer
+    );
+  }
+
+  updateBillingAccount(
+    billingAccountToUpdate: BillingAccount,
+    customer: Customer
+  ): Observable<Customer> {
+    console.log(billingAccountToUpdate.id);
+    const newCustomer: Customer = {
+      ...customer,
+    };
+    const newBillingAccount = customer.billingAccounts?.findIndex(
+      (billing) => billing.id === billingAccountToUpdate.id
+    ) as number;
+    if (newCustomer.billingAccounts) {
+      console.log(billingAccountToUpdate);
+      newCustomer.billingAccounts![newBillingAccount] = billingAccountToUpdate;
+    }
 
     return this.httpClient.put<Customer>(
       `${this.apiControllerUrl}/${customer.id}`,
