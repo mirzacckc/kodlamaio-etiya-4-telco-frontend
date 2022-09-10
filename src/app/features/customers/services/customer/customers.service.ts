@@ -302,7 +302,6 @@ export class CustomersService {
       (billing) => billing.id === billingAccountToUpdate.id
     ) as number;
     if (newCustomer.billingAccounts) {
-      console.log(billingAccountToUpdate);
       newCustomer.billingAccounts![newBillingAccount] = billingAccountToUpdate;
     }
 
