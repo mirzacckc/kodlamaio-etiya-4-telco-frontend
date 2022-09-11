@@ -178,3 +178,7 @@ add new adress */
 
     color: #FFFFFF;
 }
+
+.e-btn-accordion-body:disabled{
+    opacity: 0.5;
+}
