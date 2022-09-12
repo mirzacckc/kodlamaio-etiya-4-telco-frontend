@@ -83,7 +83,8 @@
 }
 
 .accordion-button img:hover {
-  border: 2px solid #f58220 !important;
+  background-color: #f58220 !important;
+  cursor: pointer;
 }
 
 .e-accordion-text {
