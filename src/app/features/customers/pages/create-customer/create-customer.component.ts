@@ -23,6 +23,11 @@ export class CreateCustomerComponent implements OnInit {
   isNationaltyId: Boolean = false;
   today: Date = new Date();
   isBirthDate: Boolean = false;
+  maxDate: Date = new Date(
+    this.today.getFullYear(),
+    this.today.getMonth(),
+    this.today.getDate()
+  );
 
   constructor(
     private formBuilder: FormBuilder,
@@ -93,18 +98,19 @@ export class CreateCustomerComponent implements OnInit {
   }
 
   onDateChange(event: any) {
+    console.log(this.maxDate);
     this.isBirthDate = false;
     let date = new Date(event.target.value);
-    if (
-      date.getDate() > this.today.getDate() ||
-      date.getMonth() > this.today.getMonth()
-    ) {
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    if (date.getTime() > this.maxDate.getTime()) {
       this.profileForm.get('birthDate')?.setValue('');
       this.isBirthDate = true;
     } else {
       this.isBirthDate = false;
     }
-    console.log(date.getDate());
   }
 
   // onDateChange(event: any) {

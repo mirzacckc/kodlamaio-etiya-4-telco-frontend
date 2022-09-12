@@ -19,6 +19,11 @@ export class UpdateCustomerComponent implements OnInit {
   isNationaltyId: Boolean = false;
   today: Date = new Date();
   isBirthDate: Boolean = false;
+  maxDate: Date = new Date(
+    this.today.getFullYear(),
+    this.today.getMonth(),
+    this.today.getDate()
+  );
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,13 +77,30 @@ export class UpdateCustomerComponent implements OnInit {
     }
   }
 
+  isValidDate() {
+    let formDate: Date = new Date(this.updateCustomerForm.value.birthDate);
+    let inputDate: Date = new Date(this.customer.birthDate as string);
+    if (
+      formDate.getFullYear() == inputDate.getFullYear() &&
+      formDate.getMonth() == inputDate.getMonth() &&
+      formDate.getDay() == inputDate.getDay()
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   onDateChange(event: any) {
+    console.log(this.maxDate);
     this.isBirthDate = false;
     let date = new Date(event.target.value);
-    if (
-      date.getDate() > this.today.getDate() ||
-      date.getMonth() > this.today.getMonth()
-    ) {
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    console.log(date);
+    if (date.getTime() > this.maxDate.getTime()) {
       this.updateCustomerForm.get('birthDate')?.setValue('');
       this.isBirthDate = true;
     } else {

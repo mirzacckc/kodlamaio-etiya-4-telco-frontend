@@ -190,6 +190,7 @@
                   etiyaButton="clear"
                   (click)="update()"
                   [disabled]="
+                    isValidDate() &&
                     updateCustomerForm.value.firstName == customer.firstName &&
                     updateCustomerForm.value.lastName == customer.lastName &&
                     updateCustomerForm.value.middleName ==
