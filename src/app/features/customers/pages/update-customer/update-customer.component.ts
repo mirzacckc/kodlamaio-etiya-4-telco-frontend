@@ -16,10 +16,9 @@ export class UpdateCustomerComponent implements OnInit {
   selectedCustomerId!: number;
   customer!: Customer;
   isShow: Boolean = false;
-  isNationaltyId:Boolean=false;
+  isNationaltyId: Boolean = false;
   today: Date = new Date();
-  isBirthDate:Boolean=false;
-
+  isBirthDate: Boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -76,12 +75,16 @@ export class UpdateCustomerComponent implements OnInit {
   onDateChange(event: any) {
     this.isBirthDate = false;
     let date = new Date(event.target.value);
-    if (date.getFullYear() > this.today.getFullYear() || 
-    date.getMonth() > this.today.getMonth() || 
-    date.getDay() > this.today.getDay()) {
+    if (
+      date.getDate() > this.today.getDate() ||
+      date.getMonth() > this.today.getMonth()
+    ) {
       this.updateCustomerForm.get('birthDate')?.setValue('');
       this.isBirthDate = true;
+    } else {
+      this.isBirthDate = false;
     }
+    console.log(date.getDate());
   }
 
   updateCustomer() {
@@ -90,14 +93,11 @@ export class UpdateCustomerComponent implements OnInit {
       { id: this.customer.id },
       this.updateCustomerForm.value
     );
-    this.customerService
-      .update(customer, this.customer)
-      .subscribe(() => {
-        this.router.navigateByUrl(
-          `/dashboard/customers/customer-info/${customer.id}`
-        );
-        
-      });
+    this.customerService.update(customer, this.customer).subscribe(() => {
+      this.router.navigateByUrl(
+        `/dashboard/customers/customer-info/${customer.id}`
+      );
+    });
   }
 
   checkInvalid() {
@@ -119,11 +119,10 @@ export class UpdateCustomerComponent implements OnInit {
         return item.nationalityId == id;
       });
       if (matchCustomer) {
-        this.isNationaltyId=true
-      } else{ 
+        this.isNationaltyId = true;
+      } else {
         this.updateCustomer();
-        this.isNationaltyId=false
-
+        this.isNationaltyId = false;
       }
     });
   }
@@ -142,9 +141,9 @@ export class UpdateCustomerComponent implements OnInit {
     return false;
   }
 
-  previousPage(){
-    this.router.navigateByUrl(`/dashboard/customers/customer-info/${this.selectedCustomerId}`)
-
+  previousPage() {
+    this.router.navigateByUrl(
+      `/dashboard/customers/customer-info/${this.selectedCustomerId}`
+    );
   }
-  
 }

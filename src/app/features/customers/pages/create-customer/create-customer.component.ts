@@ -19,16 +19,16 @@ export class CreateCustomerComponent implements OnInit {
   profileForm!: FormGroup;
   createCustomerModel$!: Observable<Customer>;
   customer!: Customer;
-  isShow:Boolean=false
-  isNationaltyId:Boolean=false
+  isShow: Boolean = false;
+  isNationaltyId: Boolean = false;
   today: Date = new Date();
-  isBirthDate:Boolean=false;
+  isBirthDate: Boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private customerService: CustomersService,
     private router: Router,
-    private messageService:MessageService
+    private messageService: MessageService
   ) {
     this.createCustomerModel$ = this.customerService.customerToAddModel$;
   }
@@ -37,7 +37,6 @@ export class CreateCustomerComponent implements OnInit {
     this.createCustomerModel$.subscribe((state) => {
       this.customer = state;
       this.createFormAddCustomer();
-
     });
   }
 
@@ -50,8 +49,10 @@ export class CreateCustomerComponent implements OnInit {
       gender: ['', Validators.required],
       fatherName: [''],
       motherName: [''],
-      nationalityId: ['',
-        [Validators.pattern('^[0-9]{11}$'), Validators.required]],
+      nationalityId: [
+        '',
+        [Validators.pattern('^[0-9]{11}$'), Validators.required],
+      ],
     });
   }
 
@@ -61,25 +62,23 @@ export class CreateCustomerComponent implements OnInit {
         return item.nationalityId == id;
       });
       if (matchCustomer) {
-        this.isNationaltyId=true
+        this.isNationaltyId = true;
       } else {
-        this.isNationaltyId=false
+        this.isNationaltyId = false;
         this.customerService.setDemographicInfoToStore(this.profileForm.value);
         this.router.navigateByUrl('/dashboard/customers/list-address-info');
       }
     });
   }
 
-
   goNextPage() {
     if (this.profileForm.valid) {
-      this.isNationaltyId=false
-      this.isShow = false
+      this.isNationaltyId = false;
+      this.isShow = false;
       this.getCustomers(this.profileForm.value.nationalityId);
-    }
-    else{
-      this.isNationaltyId=false
-      this.isShow = true
+    } else {
+      this.isNationaltyId = false;
+      this.isShow = true;
     }
   }
 
@@ -96,12 +95,28 @@ export class CreateCustomerComponent implements OnInit {
   onDateChange(event: any) {
     this.isBirthDate = false;
     let date = new Date(event.target.value);
-    if (date.getFullYear() > this.today.getFullYear() || 
-    date.getMonth() > this.today.getMonth() || 
-    date.getDay() > this.today.getDay()) {
+    if (
+      date.getDate() > this.today.getDate() ||
+      date.getMonth() > this.today.getMonth()
+    ) {
       this.profileForm.get('birthDate')?.setValue('');
       this.isBirthDate = true;
+    } else {
+      this.isBirthDate = false;
     }
+    console.log(date.getDate());
   }
 
+  // onDateChange(event: any) {
+  //   this.isBirthDate = false;
+  //   let date = new Date(event.target.value);
+  //   if (
+  //     date.getFullYear() > this.today.getFullYear() ||
+  //     date.getMonth() > this.today.getMonth() ||
+  //     date.getDay() > this.today.getDay()
+  //   ) {
+  //     this.profileForm.get('birthDate')?.setValue('');
+  //     this.isBirthDate = true;
+  //   }
+  // }
 }

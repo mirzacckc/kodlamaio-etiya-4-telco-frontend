@@ -36,9 +36,8 @@ import { StoreModule } from '@ngrx/store';
 import { sharedReducers } from './store/shared.reducers';
 import { ValidationDialogPopupComponent } from './components/validation-dialog-popup/validation-dialog-popup.component';
 
-import {DialogModule} from 'primeng/dialog';
 import { OfferPopupComponent } from './components/offer-popup/offer-popup.component';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ProductDetailPopupComponent } from './components/product-detail-popup/product-detail-popup.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +69,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     TableAccordionHeaderComponent,
     ValidationDialogPopupComponent,
     OfferPopupComponent,
+    ProductDetailPopupComponent,
   ],
   imports: [
     CommonModule,
@@ -106,9 +106,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     TableScrollComponent,
     TableAccordionHeaderComponent,
     ValidationDialogPopupComponent,
-    OfferPopupComponent
-
-
+    OfferPopupComponent,
+    ProductDetailPopupComponent,
   ],
   providers: [MessageService],
 })

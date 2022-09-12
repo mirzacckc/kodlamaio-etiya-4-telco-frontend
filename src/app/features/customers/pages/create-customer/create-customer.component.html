@@ -103,6 +103,14 @@
                     }"
                   />
                 </div>
+                <small
+                  *ngIf="isBirthDate"
+                  id="lastName-help"
+                  class="p-error block ng-invalid ng-dirty"
+                  style="color: red; margin-left: 300px; margin-top: -15px"
+                >
+                  Wrong Data
+                </small>
               </div>
             </div>
             <div class="col-12 col-lg-6 d=flex justify-content-start mb-5">
