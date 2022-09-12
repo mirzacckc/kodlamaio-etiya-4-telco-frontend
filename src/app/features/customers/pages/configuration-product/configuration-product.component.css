@@ -83,3 +83,29 @@ small{
   font-size: 25px!important;
   color: red
 }
+
+.scroll-product{
+  height: 700px;
+  overflow-y: scroll;
+  border-color:#f58220
+
+}
+
+
+.scroll-product::-webkit-scrollbar {
+  width: 15px;
+}
+
+
+.scroll-product::-webkit-scrollbar-track {
+  background:#1a4981; 
+}
+
+
+.scroll-product::-webkit-scrollbar-thumb {
+  background: #f58220; 
+}
+
+.scroll-product::-webkit-scrollbar-thumb:hover {
+  background:#f58220; 
+}
