@@ -36,12 +36,12 @@ export class CustomerInfoComponent implements OnInit {
         this.messageService.clear();
         if (filteredData) {
           this.messageService.add({
-            key: 'okey',            
+            key: 'okey',
             sticky: true,
             severity: 'warn',
             detail:
-              'Since the customer has active products, the customer cannot be deleted.',            
-          });   
+              'Since the customer has active products, the customer cannot be deleted.',
+          });
         } else {
           this.messageService.clear();
           this.removeCustomer();
@@ -49,7 +49,6 @@ export class CustomerInfoComponent implements OnInit {
       }
     });
   }
-
 
   getCustomerById() {
     this.activatedRoute.params.subscribe((params) => {
@@ -67,7 +66,12 @@ export class CustomerInfoComponent implements OnInit {
   }
 
   getCustomerId(customer: Customer) {
-    this.router.navigateByUrl(`/dashboard/customers/update-customer/${customer.id}`);
+    this.router.navigateByUrl(
+      `/dashboard/customers/update-customer/${customer.id}`
+    );
+    setTimeout(() => {
+      window.location.reload();
+    }, 1);
   }
 
   removeCustomerPopup(customer: Customer) {

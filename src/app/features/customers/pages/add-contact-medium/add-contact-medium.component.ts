@@ -13,7 +13,7 @@ import { CustomersService } from '../../services/customer/customers.service';
 export class AddContactMediumComponent implements OnInit {
   contactForm!: FormGroup;
   customer!: Customer;
-  isShow:Boolean=false
+  isShow: Boolean = false;
 
   constructor(
     private customersService: CustomersService,
@@ -30,11 +30,14 @@ export class AddContactMediumComponent implements OnInit {
   }
   createFormContactMedium() {
     this.contactForm = this.formBuilder.group({
-      email: [this.customer.contactMedium?.email, [Validators.email,Validators.required]],
+      email: [
+        this.customer.contactMedium?.email,
+        [Validators.email, Validators.required],
+      ],
       homePhone: [this.customer.contactMedium?.homePhone, Validators.required],
       mobilePhone: [
         this.customer.contactMedium?.mobilePhone,
-        [Validators.pattern('^[0-9]{11}$'),Validators.required],
+        [Validators.pattern('^[0-9]{11}$'), Validators.required],
       ],
       fax: [this.customer.contactMedium?.fax, Validators.required],
     });
@@ -51,11 +54,10 @@ export class AddContactMediumComponent implements OnInit {
 
   Save() {
     if (this.contactForm.valid) {
-      this.isShow = false
-      this.saveCustomer()
-    }
-    else{
-      this.isShow = true
+      this.isShow = false;
+      this.saveCustomer();
+    } else {
+      this.isShow = true;
     }
   }
 
@@ -64,7 +66,9 @@ export class AddContactMediumComponent implements OnInit {
     this.customersService.add(this.customer).subscribe({
       next: (data) => {
         setTimeout(() => {
-          window.location.href = '/dashboard/customers/customer-dashboard';
+          this.router.navigateByUrl(
+            `dashboard/customers/customer-info/${data.id}`
+          );
         }, 1000);
       },
       error: (err) => {
@@ -85,7 +89,4 @@ export class AddContactMediumComponent implements OnInit {
     event.preventDefault();
     return false;
   }
-
-
-
 }
